@@ -34,17 +34,19 @@ if($search){
 		<tr><td align="left"><b>Contact Id</b></td>
 		<td align="left"><b>First Name</b></td>
 		<td align="left"><b>Middle Name</b></td>
-		<td align="left"><b>Last Name</b></td></tr>';
+		<td align="left"><b>Last Name</b></td>
+		<td align="left"><b>Action</b></td></tr>';
 
 		// mysqli_fetch_array will return a row of data from the query
 		// until no further data is available
 		while($row = mysqli_fetch_array($response)){
-
+			$id = $row['ContactId'];
 			echo '<tr><td align="left">' . 
 			$row['ContactId'] . '</td><td align="left">' . 
 			$row['Fname'] . '</td><td align="left">' . 
 			$row['Mname'] . '</td><td align="left">' .
-			$row['Lname'] . '</td><td align="left">';
+			$row['Lname'] . '</td><td align="left">'.
+			'<td><a href="delete.php?id = '.$row['ContactId'].'"> Delete </a></td>';
 
 			echo '</tr>';
 		}
