@@ -4,13 +4,10 @@
     <title>Contact Info</title>
 </head>
 <body>
-
 	<form action = "getstudentinfo.php" method="GET">
 		<input type = "text" name="search">
 		<input type = "submit" value="Search">
 	</form>
-
-
 <?php
 // Get a connection for the database
 require_once('mysqli_connect.php');
@@ -35,7 +32,8 @@ if($search){
 		<td align="left"><b>First Name</b></td>
 		<td align="left"><b>Middle Name</b></td>
 		<td align="left"><b>Last Name</b></td>
-		<td align="left"><b>Action</b></td></tr>';
+		<td align="left"><b>Delete</b></td>
+		<td align="left"><b>Modify</b></td></tr>';
 
 		// mysqli_fetch_array will return a row of data from the query
 		// until no further data is available
@@ -46,7 +44,8 @@ if($search){
 			$row['Fname'] . '</td><td align="left">' . 
 			$row['Mname'] . '</td><td align="left">' .
 			$row['Lname'] . '</td><td align="left">'.
-			'<td><a href="delete.php?id = '.$row['ContactId'].'"> Delete </a></td>';
+			'<a href="delete.php?id = '.$row['ContactId'].'"> Delete </a></td>'.
+			'</td><td align="left">'. '<a href="modify.php?id = '.$row['ContactId'].'"> Modify </a></td>';
 
 			echo '</tr>';
 		}

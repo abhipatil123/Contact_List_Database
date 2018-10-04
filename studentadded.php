@@ -6,6 +6,7 @@
 <body>
 <?php
 
+    $button = $_GET["id"];
 //if(isset($_POST['submit'])){
     
     $data_missing = array();
@@ -51,38 +52,54 @@
         
         require_once('mysqli_connect.php');
         
-        $query = "INSERT INTO contact ( ContactId, Fname, Mname, Lname) VALUES ( NULL, '$f_name', '$m_name',  '$l_name')";
-        
-        $stmt = mysqli_prepare($dbc, $query);
-        
-        //i Integers
-        //d Doubles
-        //b Blobs
-        //s Everything Else
-        
-        mysqli_stmt_bind_param($stmt, "sss", $f_name, $m_name, $l_name);
-        
-        mysqli_stmt_execute($stmt);
-        
-        $affected_rows = mysqli_stmt_affected_rows($stmt);
-        
-        if($affected_rows == 1){
+        if(!$button){
             
-            echo 'Contact Entered';
+            $query = "INSERT INTO contact ( ContactId, Fname, Mname, Lname) VALUES ( NULL, '$f_name', '$m_name',  '$l_name')";
             
-            mysqli_stmt_close($stmt);
+            $stmt = mysqli_prepare($dbc, $query);
             
+            //i Integers
+            //d Doubles
+            //b Blobs
+            //s Everything Else
+            
+            mysqli_stmt_bind_param($stmt, "sss", $f_name, $m_name, $l_name);
+            
+            mysqli_stmt_execute($stmt);
+            
+            $affected_rows = mysqli_stmt_affected_rows($stmt);
+            
+            if($affected_rows == 1){
+                
+                echo 'Contact Entered';
+                
+                mysqli_stmt_close($stmt);
+                
+                mysqli_close($dbc);
+                
+            } else {
+                
+                echo 'Error Occurred<br />';
+                echo mysqli_error($query);
+                
+                mysqli_stmt_close($stmt);
+                
+                mysqli_close($dbc);
+                
+            }
+        }
+        else{
+            $query = "UPDATE  contact  SET  Fname = '$f_name', Mname = '$m_name',  Lname = '$l_name' WHERE ContactId = $button";
+            $result = mysqli_query($dbc, $query);
+            if($result){
+                "Contact Modified Succesfully";
+            }else{
+                "Error Occured";
+            }
             mysqli_close($dbc);
-            
-        } else {
-            
-            echo 'Error Occurred<br />';
-            echo mysqli_error($query);
-            
-            mysqli_stmt_close($stmt);
-            
-            mysqli_close($dbc);
-            
+            echo "<br/>";
+            echo "<a herf = 'addStudent.html'> Home </a>";
+            exit;
         }
         
     } else {    
@@ -98,9 +115,9 @@
         
     }
     
-//}else{
-  //  echo "Error: isSet is Null";
-//}
+// }else{
+//    echo "Error: isSet is Null";
+// }
 
 ?>
 
