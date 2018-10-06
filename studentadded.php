@@ -5,7 +5,6 @@
 </head>
 <body>
 <?php
-
     $button = $_GET["id"];
 //if(isset($_POST['submit'])){
     
@@ -46,6 +45,105 @@
         $l_name = trim($_POST['last_name']);
 
     }
+
+    if(empty($_POST['add_type'])){
+
+        // Adds name to array
+        $data_missing[] = 'add_type';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $addtype = trim($_POST['add_type'][0]);
+
+        
+    }
+
+    // if(empty($_POST['address'])){
+
+    //     // Adds name to array
+    //     $data_missing[] = 'Address';
+
+    // } else{
+
+        // Trim white space from the name and store the name
+       
+        $address = $_POST['address'][0];
+
+        
+   // }
+
+    if(empty($_POST['city'])){
+
+        // Adds name to array
+        $data_missing[] = 'City';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $city = $_POST['city'][0];
+
+    }
+
+    if(empty($_POST['state'])){
+
+        // Adds name to array
+        $data_missing[] = 'State';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $state = trim($_POST['state'][0]);
+
+    }
+
+    if(empty($_POST['zip'])){
+
+        // Adds name to array
+        $data_missing[] = 'Zip Code';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $zip = trim($_POST['zip'][0]);
+
+    }
+
+    if(empty($_POST['areacode'])){
+
+        // Adds name to array
+        $data_missing[] = 'Area Code';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $areacode = trim($_POST['areacode'][1]);
+
+    }
+
+    if(empty($_POST['number'])){
+
+        // Adds name to array
+        $data_missing[] = 'Phone Number';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $number = trim($_POST['number'][1]);
+
+    }
+
+    if(empty($_POST['day'])){
+
+        // Adds name to array
+        $data_missing[] = 'Date';
+
+    } else{
+
+        // Trim white space from the name and store the name
+        $date = trim($_POST['day'][1]);
+
+    }
     
     
     if(empty($data_missing)){
@@ -53,8 +151,9 @@
         require_once('mysqli_connect.php');
         
         if(!$button){
-            
-            $query = "INSERT INTO contact ( ContactId, Fname, Mname, Lname) VALUES ( NULL, '$f_name', '$m_name',  '$l_name')";
+
+            $query = "INSERT INTO contact ( ContactId, Fname, Mname, Lname) VALUES ( NULL, '$f_name', '$m_name',  '$l_name'
+                                                                                    )";
             
             $stmt = mysqli_prepare($dbc, $query);
             
@@ -75,7 +174,7 @@
                 
                 mysqli_stmt_close($stmt);
                 
-                mysqli_close($dbc);
+                //mysqli_close($dbc);
                 
             } else {
                 
@@ -84,9 +183,37 @@
                 
                 mysqli_stmt_close($stmt);
                 
-                mysqli_close($dbc);
+                //mysqli_close($dbc);
                 
             }
+
+            // Create a query for the database
+            $query = "SELECT * FROM contact WHERE Fname='$f_name' AND Mname='$m_name' AND Lname='$l_name'";
+            // Get a response from the database by sending the connection
+            // and the query
+            $response = mysqli_query($dbc, $query);
+
+            $id = 0;
+            // If the query executed properly proceed
+            if($response){
+                $row = mysqli_fetch_array($response);
+                $id = $row['ContactId'];
+            }else{
+                "Error";
+            }
+
+
+            $query = "INSERT INTO address ( Contact_Id, Address_type, Address, City, State, Zip) 
+                      VALUES ( '$id', '$addtype', '$address', '$city',  '$state', '$zip')";
+            
+            $result = mysqli_query($dbc, $query);
+            if($result){
+                "Contact Modified Succesfully";
+            }else{
+                "Error Occured while adding to address";
+            }
+            mysqli_close($dbc);
+
         }
         else{
             $query = "UPDATE  contact  SET  Fname = '$f_name', Mname = '$m_name',  Lname = '$l_name' WHERE ContactId = $button";
@@ -98,7 +225,7 @@
             }
             mysqli_close($dbc);
             echo "<br/>";
-            echo "<a herf = 'addStudent.html'> Home </a>";
+            echo "<a href = 'addStudent.html'> Home </a>";
             exit;
         }
         
@@ -114,36 +241,7 @@
         echo "<br />";
         
     }
-    
-// }else{
-//    echo "Error: isSet is Null";
-// }
 
 ?>
-
- <form action="http://localhost/contactlist/Contact_List_Database/studentadded.php" method="post">
-        
-    <table border="0">
-        <tr>
-            <td>First Name</td>
-            <td align="center"> <input type="text" name="first_name" size="30" /></td>
-        </tr>
-
-        <tr>
-            <td>Middle Name</td>
-            <td align="center"> <input type="text" name="middle_name" size="30" /></td>
-        </tr>
-
-        <tr>
-            <td>Last Name</td>
-            <td align="center"> <input type="text" name="last_name" size="30" /></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" align="center"><input type="submit" value="Send"/></td>
-        </tr>
-    </table>
-
-  </form>
 </body>
 </html>

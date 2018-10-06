@@ -4,7 +4,7 @@
     <title>Contact Info</title>
 </head>
 <body>
-	<form action = "getstudentinfo.php" method="GET">
+	<form action = "displayContacts.php" method="GET">
 		<input type = "text" name="search">
 		<input type = "submit" value="Search">
 	</form>

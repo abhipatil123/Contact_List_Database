@@ -1,9 +1,12 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
     <title>Add Contact</title>
 </head>
+
+
 
 <body>
 
@@ -26,11 +29,29 @@
             </tr>
 
             <tr>
-                <td colspan="2" align="center"><input type="submit" name='newcontact' value="Send"/></td>
+                <td colspan="2" align="center"><input type="submit" name='newcontact' value="Send" /></td>
             </tr>
+
         </table>
 
     </form>
+
+    <script>
+        $(document).ready(function () {
+            var phone_number_form_index = 0;
+            $("#add_phone_number").click(function () {
+                phone_number_form_index++;
+                $(this).parent().before($("#phone_number_form").clone().attr("id", "phone_number_form" + phone_number_form_index));
+                $("#phone_number_form" + phone_number_form_index + " :input").each(function () {
+                    $(this).attr("name", $(this).attr("name") + phone_number_form_index);
+                    $(this).attr("id", $(this).attr("id") + phone_number_form_index);
+                });
+                $("#remove_phone_number" + phone_number_form_index).click(function () {
+                    $(this).closest("div").remove();
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

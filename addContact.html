@@ -1,0 +1,39 @@
+<html>
+
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+<div id="attendees">
+    <div id="att1" class="attendee">
+        <fieldset>
+            <legend><span class="legend">Address</span></legend>
+            <p name="test">
+                <label for="A_Title_1">Work Address: </label>
+                <input name="A_Title_1" id="A_Title_1" value="" type="text" class="f_input" />
+            </p>
+        </fieldset>
+    </div>
+    <a href="#" class="add">Add more</a>
+
+</div>
+
+</html>
+
+<script>
+$(function(){
+    var template = $('#attendees .attendee:first').clone();
+    var attendeesCount = 1;
+    window.addAttendee = function(){
+        attendeesCount++;
+        var attendee = template.clone().find(':input').each(function(){
+            var newId = this.id.substring(0, this.id.length-1) + attendeesCount;
+            
+            $(this).prev().attr('for', newId); // update label for
+            this.name = this.id = newId; // update id and name (assume the same)
+        }).end()
+        .attr('id', 'att' + attendeesCount)
+        .prependTo('#attendees');
+    }
+    $('.add').click(addAttendee);
+});
+</script>
