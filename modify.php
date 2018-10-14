@@ -15,15 +15,53 @@
 
             });
            
-            $(document).on("click", "#del", function () {
+            $(document).on("click", "#del_existing", function () {
+                $ad_id=$(this).val();
+                console.log($ad_id);
+                
+                $.ajax({
+                    url: "http://localhost/contactlist/Contact_List_Database/deleteAddContact.php",
+                    type: "POST",
+                    data: "ad_id="+$ad_id,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        alert("An error occurred while loading XML file.");
+                    },
+                });
                 $(this).parent("#address_existing").remove();
             });
 
-            $(document).on("click", "#del", function () {
+            $(document).on("click", "#del_existing", function () {
+                $ph_id=$(this).val();                
+                $.ajax({
+                    url: "http://localhost/contactlist/Contact_List_Database/deletePhoneContact.php",
+                    type: "POST",
+                    data: "ph_id="+$ph_id,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        alert("An error occurred while loading XML file.");
+                    },
+                });
                 $(this).parent("#phone_existing").remove();
             });
 
-            $(document).on("click", "#del", function () {
+            $(document).on("click", "#del_existing", function () {
+                $dt_id=$(this).val();                
+                $.ajax({
+                    url: "http://localhost/contactlist/Contact_List_Database/deleteDateContact.php",
+                    type: "POST",
+                    data: "dt_id="+$dt_id,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        alert("An error occurred while loading XML file.");
+                    },
+                });
                 $(this).parent("#date_existing").remove();
             });
 
@@ -53,7 +91,7 @@
         $contact_id = $_GET["id_"];
         echo $contact_id;
     ?>
-    <form action="studentadded.php?id=<?php echo $contact_id?>" method="post">
+    <form action="addContact.php?id=<?php echo $contact_id?>" method="post">
         <h2> Modify Contact </h2>
         <br/>
         <?php
@@ -109,17 +147,17 @@
         ?>
     
         <div id="Name">
-            <table border="0">
+            <table>
                 <tr>
-                    <td align="center"> <input type="text" name="first_name" size="30" value= '<?php echo $Fname?>' /></td>
+                    <td > <input type="text" name="first_name" size="30" value= '<?php echo $Fname?>' /></td>
                 </tr>
 
                 <tr>
-                    <td align="center"> <input type="text" name="middle_name" size="30" value='<?php echo $Mname?>' /></td>
+                    <td > <input type="text" name="middle_name" size="30" value='<?php echo $Mname?>' /></td>
                 </tr>
 
                 <tr>
-                    <td align="center"> <input type="text" name="last_name" size="30" value='<?php echo $Lname?>' /></td>
+                    <td > <input type="text" name="last_name" size="30" value='<?php echo $Lname?>' /></td>
                 </tr>
             </table>
         </div>
@@ -168,7 +206,7 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del" type ="button">DEL</button>
+                <button id="del_existing" type ="button" value = "<?php echo $addressId[$i]?>" >DEL</button>
             </div>
         <?php }?>
 
@@ -241,7 +279,7 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del" type ="button">DEL</button>
+                <button id="del_existing" type ="button" value = "<?php echo $phoneId[$i]?>">DEL</button>
             </div>
         <?php } ?>
         
@@ -298,7 +336,7 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del" type ="button">DEL</button>
+                <button id="del_existing" type ="button" value = "<?php echo $dateId[$i]?>">DEL</button>
             </div>
         <?php } ?>
 

@@ -1,39 +1,48 @@
 <html>
 
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="addContact.css" />
+</head>
+
 <body>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <h1 class=mainheading>Welcome to Contact-base Management System</h1>
+
+    <!-- <div class=container>
+        <form action = "http://localhost/contactlist/Contact_List_Database/displayContacts.php" method="GET">
+            <table>
+                <tr>
+                    <td><input type = "text" name="search" class="form-control" placeholder="Search Contact"></td>
+                    <td><input type = "submit" value="Search" class="btn btn-primary"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>   -->
+    <nav class="navbar navbar-expand-lg navbar-bisque bg-bisque">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Modify</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+
 </body>
-<div id="attendees">
-    <div id="att1" class="attendee">
-        <fieldset>
-            <legend><span class="legend">Address</span></legend>
-            <p name="test">
-                <label for="A_Title_1">Work Address: </label>
-                <input name="A_Title_1" id="A_Title_1" value="" type="text" class="f_input" />
-            </p>
-        </fieldset>
-    </div>
-    <a href="#" class="add">Add more</a>
-
-</div>
-
-</html>
-
-<script>
-$(function(){
-    var template = $('#attendees .attendee:first').clone();
-    var attendeesCount = 1;
-    window.addAttendee = function(){
-        attendeesCount++;
-        var attendee = template.clone().find(':input').each(function(){
-            var newId = this.id.substring(0, this.id.length-1) + attendeesCount;
-            
-            $(this).prev().attr('for', newId); // update label for
-            this.name = this.id = newId; // update id and name (assume the same)
-        }).end()
-        .attr('id', 'att' + attendeesCount)
-        .prependTo('#attendees');
-    }
-    $('.add').click(addAttendee);
-});
-</script>

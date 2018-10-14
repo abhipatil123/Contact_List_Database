@@ -1,15 +1,19 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="main.css"/>
 
-    </script>
     <script>
 
         $(document).ready(function () {
+            $("#form").submit(function (e) {
+                //e.preventDefault();
+                console.log( $( this ).serialize() );
+                
 
+            });
 
             $("#add").click(function () {
                 $("#address").clone().appendTo("#addressclone").show();
@@ -42,134 +46,151 @@
 </head>
 
 <body>
-    <form action="http://localhost/contactlist/Contact_List_Database/studentadded.php" method="post">
-        <div id="Name">
-            <table border="0">
-                <tr>
-                    <td align="center"> <input type="text" name="first_name" size="30" placeholder='First Name' /></td>
-                </tr>
+    <div class = "container">
+        <form action="http://localhost/contactlist/Contact_List_Database/addContact.php" method="POST" id="form">
+            <fieldset>
+                <legend>Name</legend>
+                <div id="Name">
+                    <table>
+                        <tr>
+                            <td> <input type="text" name="first_name" size="30" class="form-control" placeholder='First Name'  /></td>
+                        </tr>
 
-                <tr>
-                    <td align="center"> <input type="text" name="middle_name" size="30" placeholder='Middle Name' /></td>
-                </tr>
+                        <tr>
+                            <td > <input type="text" name="middle_name" size="30" class="form-control" placeholder='Middle Name'  /></td>
+                        </tr>
 
-                <tr>
-                    <td align="center"> <input type="text" name="last_name" size="30" placeholder='Last Name' /></td>
-                </tr>
-            </table>
-        </div>
-        <br />
+                        <tr>
+                            <td> <input type="text" name="last_name" size="30" class="form-control" placeholder='Last Name'  /></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <br />
 
-        <button id="add" type="button">ADD Address Info</button>
+            <button id="add" type="button">ADD Address Info</button>
 
-        <div id="addressclone"></div>
+            <fieldset>
+                <legend>Address</legend>
+                <div id="addressclone"></div>
+            </fieldset>
 
-        <div id="address" style="display: none">
-            <table id="tab" class="wrapper">
+            <div id="address" style="display: none">
+                <table id="tab" class="wrapper">
 
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Address Type</label>
-                        <select id="add_type" name="add_type[]">
-                            <option value="Home">Home</option>
-                            <option value="Work">Work</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="address[]" placeholder='Enter Address' />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='city[]' placeholder='Enter City' class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='state[]' placeholder='Enter State' class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='zip[]' placeholder='Enter Zipcode' class="form-control" />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del">DEL</button>
-        </div>
-        <br />
-        <button id="addPhone" type="button">ADD Phone Info</button>
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <label for=add_type>Address Type</label>
+                            <select id="add_type" name="add_type[]">
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="address[]" class="form-control" placeholder='Enter Address'  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='city[]' placeholder='Enter City' class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='state[]' placeholder='Enter State' class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='zip[]' placeholder='Enter Zipcode' class="form-control" />
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del">DEL</button>
+            </div>
+            
+            <br />
+            <button id="addPhone" type="button">ADD Phone Info</button>
 
-        <div id="phoneclone"></div>
-        <div id="phone" style="display: none">
-            <table id="tab" class="wrapper">
+            <fieldset>
+                <legend>Phone</legend>
+            <div id="phoneclone"></div>
+            </fieldset>
 
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Phone Type</label>
-                        <select id="add_type" name="phone_type[]">
-                            <option value="Home">Home</option>
-                            <option value="Work">Work</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='areacode[]' placeholder='Enter Area Code' />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='number[]' placeholder='Enter Number' class="form-control" />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del">DEL</button>
-        </div>
-        <br />
-        <button id="addDate" type="button">ADD Date Info</button>
+            <div id="phone" style="display: none">
+                <table id="tab" class="wrapper">
 
-        <div id="dateclone"></div>
-        <div id="date" style="display: none">
-            <table id="tab" class="wrapper">
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <label for=add_type>Phone Type</label>
+                            <select id="add_type" name="phone_type[]">
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='areacode[]' placeholder='Enter Area Code'  class="form-control"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='number[]' placeholder='Enter Number' class="form-control" />
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del">DEL</button>
+            </div>
+            <br />
+            <button id="addDate" type="button">ADD Date Info</button>
 
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Date Type</label>
-                        <select id="add_type" name="date_type[]">
-                            <option value="BirthDate">Birth</option>
-                            <option value="AnniverseryDate">Anniversery</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="date" name='day[]' />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del">DEL</button>
-        </div>
-        <br />
-        <div id="submit">
-            <table id="tab" class="wrapper">
+            <fieldset>
+                <legend>Phone</legend>
+                <div id="dateclone"></div>
+            </fieldset>
 
-                <tr id="row" class="abcd">
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" name='newcontact' value="Send" /></td>
-                </tr>
-                </tr>
-            </table>
-        </div>
-    </form>
+            <div id="date" style="display: none">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <label for=add_type>Date Type</label>
+                            <select id="add_type" name="date_type[]">
+                                <option value="BirthDate">Birth</option>
+                                <option value="AnniverseryDate">Anniversery</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" name='day[]' />
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del">DEL</button>
+            </div>
+            <br />
+            <div id="submit">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td colspan="2" ><input type="submit" name='newcontact' value="Send" /></td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

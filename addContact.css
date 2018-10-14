@@ -1,0 +1,27 @@
+body{
+    background-color: bisque;
+}
+
+.mainheading{
+    text-align: center;
+}
+
+div.wrapper {
+    
+    position:  absolute;
+    border:1px solid black;
+}
+
+input[type="text"] {
+     width: 300px;
+     margin-top: 250px;
+     margin-left: 250px;
+     position: relative;
+     display: block;
+}
+
+input[type="submit"] {
+    margin-top: 250px;
+    position: relative;
+    display: block;
+}

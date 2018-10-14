@@ -12,12 +12,26 @@
 // Get a connection for the database
 require_once('mysqli_connect.php');
 
-$search = $_GET["search"];
+$searchString = $_GET["search"];
+$search = explode(" ", $searchString);
 
 if($search){
 	// Create a query for the database
-	$query = "SELECT * FROM contact WHERE Fname LIKE '%$search%'";
+	$query = "SELECT DISTINCT contact.* FROM contact 
+			  LEFT JOIN address ON contact.ContactId = address.Contact_Id
+			  LEFT JOIN phone ON contact.ContactId = phone.Contact_Id
+			  LEFT JOIN date ON contact.ContactId = date.Contact_Id
+			  WHERE ";
+	
+	foreach($search as $searchVar){
+		$ser = "'%" . $searchVar. "%'";
+		$query .= "(contact.ContactId LIKE " . $ser . " OR Address LIKE ". $ser ." OR City LIKE ". $ser ." OR State LIKE ". $ser ." OR Zip LIKE ". $ser ."
+		OR Fname LIKE ". $ser ." OR Mname LIKE ". $ser ." OR Lname LIKE ". $ser ."
+		OR Area_Code LIKE ". $ser ." OR Number LIKE ". $ser ." OR Date LIKE ". $ser ."OR CONCAT(Area_Code,'', Number) LIKE ". $ser .") AND ";
+	}
 
+	$query = substr($query, 0, strlen($query) - 4);
+	// $search_count = "SELECT count(*) as count from (" . $search . ") AS search";
 	// Get a response from the database by sending the connection
 	// and the query
 	$response = mysqli_query($dbc, $query);

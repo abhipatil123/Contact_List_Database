@@ -116,7 +116,7 @@
     if(empty($_POST['state'])){
 
         // Adds name to array
-        $data_missing[] = 'State';
+        $data_missing[] = 'state';
 
     } else{
 
@@ -282,13 +282,15 @@
 
             for($i = 0; $i < count($address) - 1; $i++){
                 $query = "INSERT INTO address ( Contact_Id, Address_type, Address, City, State, Zip) 
-                        VALUES ( '$id', '$addtype[$i]', '$address[$i]', '$city[$i]',  '$state[$i]', $zip[$i])";
-                
+                        VALUES ( '$id', '$addtype[$i]', '$address[$i]', '$city[$i]',  '$state[$i]', '$zip[$i]')";
+                echo "<br/>";
+                echo $query;
+                echo "<br/>";
                 $result = mysqli_query($dbc, $query);
                 if($result){
-                    "Contact Modified Succesfully";
+                    echo "Contact Address Insert Succesfully";
                 }else{
-                    "Error Occured while adding to address";
+                    echo "Error Occured while adding to address";
                 }
             }
 
@@ -298,9 +300,9 @@
                 
                 $result = mysqli_query($dbc, $query);
                 if($result){
-                    "Contact Modified Succesfully";
+                    echo "Contact Phone inserted Succesfully";
                 }else{
-                    "Error Occured while adding to phone";
+                    echo "Error Occured while adding to phone";
                 }
             }
 
@@ -310,7 +312,7 @@
                 
                 $result = mysqli_query($dbc, $query);
                 if($result){
-                    "Contact Modified Succesfully";
+                    "Contact Date Inserted Succesfully";
                 }else{
                     "Error Occured while adding to date";
                 }
