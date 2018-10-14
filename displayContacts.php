@@ -1,13 +1,27 @@
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="displayContact.css"/>
     <title>Contact Info</title>
 </head>
 <body>
-	<form action = "displayContacts.php" method="GET">
+	<h2 style="text-align: center"> Welcome to Contact Management System</h2>
+	<!-- <form action = "displayContacts.php" method="GET">
 		<input type = "text" name="search">
 		<input type = "submit" value="Search">
-	</form>
+	</form> -->
+	
+	<nav class="navbar navbar-light bg-light justify-content-between">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href= "test.html">Add New Contact</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" action = "displayContacts.php" method="GET">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+	</nav>
 <?php
 // Get a connection for the database
 require_once('mysqli_connect.php');
@@ -15,7 +29,7 @@ require_once('mysqli_connect.php');
 $searchString = $_GET["search"];
 $search = explode(" ", $searchString);
 
-if($search){
+if($searchString){
 	// Create a query for the database
 	$query = "SELECT DISTINCT contact.* FROM contact 
 			  LEFT JOIN address ON contact.ContactId = address.Contact_Id
@@ -37,15 +51,15 @@ if($search){
 	// If the query executed properly proceed
 	if($response){
 
-		echo '<table align="left"
+		echo '<div class="container"> <table align="left" class="table table-bordered"
 		cellspacing="5" cellpadding="8" class="table table-striped">
 
-		<tr><td align="left"><b>Contact Id</b></td>
-		<td align="left"><b>First Name</b></td>
-		<td align="left"><b>Middle Name</b></td>
-		<td align="left"><b>Last Name</b></td>
-		<td align="left"><b>Delete</b></td>
-		<td align="left"><b>Modify</b></td></tr>';
+		<tr><th align="left"><b>Contact Id</b></th>
+		<th align="left"><b>First Name</b></th>
+		<th align="left"><b>Middle Name</b></th>
+		<th align="left"><b>Last Name</b></th>
+		<th align="left"><b>Delete</b></th>
+		<th align="left"><b>Modify</b></th></tr>';
 
 		// mysqli_fetch_array will return a row of data from the query
 		// until no further data is available
@@ -63,7 +77,7 @@ if($search){
 		}
 
 		echo '</table>';
-
+		echo '</div>';
 	} else {
 
 		echo "Couldn't issue database query<br />";

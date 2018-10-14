@@ -46,6 +46,7 @@
 </head>
 
 <body>
+    <h2 style="text-align: center"> Add Contact </h2>
     <div class = "container">
         <form action="http://localhost/contactlist/Contact_List_Database/addContact.php" method="POST" id="form" class="form-group" >
             <fieldset class="scheduler-border">
@@ -82,11 +83,11 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Address Type</label>
-                            <select id="add_type" name="add_type[]">
+                            <input list="add_type" placeholder="Address Type" name="add_type[]">
+                            <datalist id="add_type">
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
-                            </select>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
@@ -128,11 +129,11 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Phone Type</label>
-                            <select id="add_type" name="phone_type[]">
+                            <input list="phone_type" placeholder="Phone Type" name="phone_type[]">
+                            <datalist id="phone_type">
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
-                            </select>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
@@ -163,16 +164,16 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Date Type</label>
-                            <select id="add_type" name="date_type[]">
-                                <option value="BirthDate">Birth</option>
-                                <option value="AnniverseryDate">Anniversery</option>
-                            </select>
+                            <input list="date_type" placeholder="Date Type" name="date_type[]">
+                            <datalist id="date_type">
+                                <option value="Birth">Birth</option>
+                                <option value="Anniversery">Anniversery</option>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="date" name='day[]' />
+                            <input type="date" name='day[]' class="form-control"/>
                         </td>
                     </tr>
                     </tr>

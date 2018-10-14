@@ -10,7 +10,7 @@
     
     $data_missing = array();
 
-    print_r($_POST);
+    //print_r($_POST);
     if(empty($_POST['first_name'])){
 
         // Adds name to array

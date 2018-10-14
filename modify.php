@@ -92,10 +92,9 @@
 <body>
     <?php
         $contact_id = $_GET["id_"];
-        echo $contact_id;
     ?>
     <form action="addContact.php?id=<?php echo $contact_id?>" method="post">
-        <h2> Modify Contact </h2>
+        <h2 style="text-align: center"> Modify Contact </h2>
         <br/>
         <?php
             require_once('mysqli_connect.php');
@@ -180,11 +179,11 @@
                             <tr id="row" class="abcd">
                             <tr>
                                 <td>
-                                    <label for=add_type>Address Type</label>
-                                    <select id="add_type" name="add_type[]" value = "<?php echo $addresstype[$i]?>">
+                                    <input list="add_type" value='<?php echo  $addresstype[$i]?>' name="add_type[]">
+                                    <datalist id="add_type">
                                         <option value="Home">Home</option>
                                         <option value="Work">Work</option>
-                                    </select>
+                                    </datalist>
                                 </td>
                                 <td> 
                                     <input type = "hidden" name = "addressId[]" value = "<?php echo $addressId[$i]?>"/>
@@ -228,11 +227,11 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Address Type</label>
-                            <select id="add_type" name="add_type[]">
+                            <input list="add_type" value='<?php echo  $addresstype[$i]?>' name="add_type[]">
+                            <datalist id="add_type">
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
-                            </select>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
@@ -272,11 +271,11 @@
                             <tr id="row" class="abcd">
                             <tr>
                                 <td>
-                                    <label for=add_type>Phone Type</label>
-                                    <select id="add_type" name="phone_type[]">
+                                    <input list="phone_type" value='<?php echo  $phonetype[$i]?>' name="phone_type[]">
+                                    <datalist id="phone_type">
                                         <option value="Home">Home</option>
                                         <option value="Work">Work</option>
-                                    </select>
+                                    </datalist>
                                 </td>
                                 <td> 
                                     <input type = "hidden" name = "phoneId[]" value = "<?php echo $phoneId[$i]?>"/>
@@ -309,11 +308,11 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Phone Type</label>
-                            <select id="add_type" name="phone_type[]">
+                            <input list="phone_type" value='<?php echo  $phonetype[$i]?>' name="phone_type[]">
+                            <datalist id="phone_type">
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
-                            </select>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
@@ -341,11 +340,11 @@
                             <tr id="row" class="abcd">
                             <tr>
                                 <td>
-                                    <label for=add_type>Date Type</label>
-                                    <select id="add_type" name="date_type[]">
-                                        <option value="BirthDate">Birth</option>
-                                        <option value="AnniverseryDate">Anniversery</option>
-                                    </select>
+                                    <input list="date_type" value='<?php echo  $datetype[$i]?>' name="date_type[]">
+                                    <datalist id="date_type">
+                                        <option value="Birth">Birth</option>
+                                        <option value="Anniversery">Anniversery</option>
+                                    </datalist>
                                 </td>
                                 <td> 
                                     <input type = "hidden" name = "dateId[]" value = "<?php echo $dateId[$i]?>"/>
@@ -373,11 +372,11 @@
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Phone Type</label>
-                            <select id="add_type" name="date_type[]">
-                                <option value="BirthDate">Birth</option>
-                                <option value="AnniverseryDate">Anniversery</option>
-                            </select>
+                            <input list="date_type" value='<?php echo  $datetype[$i]?>' name="date_type[]">
+                            <datalist id="date_type">
+                                <option value="Birth">Birth</option>
+                                <option value="Anniversery">Anniversery</option>
+                            </datalist>
                         </td>
                     </tr>
                     <tr>
