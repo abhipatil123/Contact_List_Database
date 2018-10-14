@@ -3,7 +3,10 @@
 <head>
     <title>Add Contact</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-    </script>
+    </script>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+
     <script>
         $(document).ready(function () {
             $("#add").click(function () {
@@ -145,115 +148,164 @@
                 }
             }
         ?>
-    
-        <div id="Name">
-            <table>
-                <tr>
-                    <td > <input type="text" name="first_name" size="30" value= '<?php echo $Fname?>' /></td>
-                </tr>
+        <div class = "container">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Name</legend>
+                <div id="Name">
+                    <table>
+                        <tr>
+                            <td > <input type="text" name="first_name" size="30" value= '<?php echo $Fname?>' class="form-control"/></td>
+                        </tr>
 
-                <tr>
-                    <td > <input type="text" name="middle_name" size="30" value='<?php echo $Mname?>' /></td>
-                </tr>
+                        <tr>
+                            <td > <input type="text" name="middle_name" size="30" value='<?php echo $Mname?>' class="form-control"/></td>
+                        </tr>
 
-                <tr>
-                    <td > <input type="text" name="last_name" size="30" value='<?php echo $Lname?>' /></td>
-                </tr>
-            </table>
-        </div>
-        <br />
+                        <tr>
+                            <td > <input type="text" name="last_name" size="30" value='<?php echo $Lname?>' class="form-control"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <br />
 
-        <button id="add" type="button">ADD Address Info</button>
+            <button id="add" type="button" class="btn btn-primary btn-sm">ADD Address Info</button>
 
-        <div id="addressclone"></div>
-        
-        <?php for($i = 0; $i < count($address); $i++){?>
-            <div id="address_existing">
+            <?php for($i = 0; $i < count($address); $i++){?>
+                <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Address Old</legend>
+                    <div id="address_existing">
+                        <table id="tab" class="wrapper">
+
+                            <tr id="row" class="abcd">
+                            <tr>
+                                <td>
+                                    <label for=add_type>Address Type</label>
+                                    <select id="add_type" name="add_type[]" value = "<?php echo $addresstype[$i]?>">
+                                        <option value="Home">Home</option>
+                                        <option value="Work">Work</option>
+                                    </select>
+                                </td>
+                                <td> 
+                                    <input type = "hidden" name = "addressId[]" value = "<?php echo $addressId[$i]?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="address[]" value='<?php echo $address[$i]?>' class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name='city[]' value='<?php echo $city[$i]?>' class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name='state[]' value='<?php echo $state[$i]?>' class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name='zip[]' value='<?php echo $zip[$i]?>' class="form-control" />
+                                </td>
+                            </tr>
+                            </tr>
+                        </table>
+                        <button id="del_existing" type ="button" class="btn btn-danger btn-sm" value = "<?php echo $addressId[$i]?>" >DEL</button>
+                    </div>
+                </fieldset>
+            <?php }?>
+
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Address New</legend>
+            <div id="addressclone"></div>
+            </fieldset>
+
+            <div id="address" style="display: none">
                 <table id="tab" class="wrapper">
 
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
                             <label for=add_type>Address Type</label>
-                            <select id="add_type" name="add_type[]" value = "<?php echo $addresstype[$i]?>">
+                            <select id="add_type" name="add_type[]">
                                 <option value="Home">Home</option>
                                 <option value="Work">Work</option>
                             </select>
                         </td>
-                        <td> 
-                            <input type = "hidden" name = "addressId[]" value = "<?php echo $addressId[$i]?>"/>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="address[]" placeholder='Enter Address' class="form-control" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="address[]" value='<?php echo $address[$i]?>' />
+                            <input type="text" name='city[]' placeholder='Enter City' class="form-control" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name='city[]' value='<?php echo $city[$i]?>' class="form-control" />
+                            <input type="text" name='state[]' placeholder='Enter State' class="form-control" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name='state[]' value='<?php echo $state[$i]?>' class="form-control" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" name='zip[]' value='<?php echo $zip[$i]?>' class="form-control" />
+                            <input type="text" name='zip[]' placeholder='Enter Zipcode' class="form-control" />
                         </td>
                     </tr>
                     </tr>
                 </table>
-                <button id="del_existing" type ="button" value = "<?php echo $addressId[$i]?>" >DEL</button>
+                <button id="del" type ="button" class="btn btn-danger btn-sm">DEL</button>
             </div>
-        <?php }?>
+            <br />
+            <button id="addPhone" type="button" class="btn btn-primary btn-sm">ADD Phone Info</button>
+            
+            <?php for($i = 0; $i < count($phonetype); $i++){?>
+                
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Phone Old</legend>
+                    <div id="phone_existing">
+                        <table id="tab" class="wrapper">
 
-        <div id="address" style="display: none">
-            <table id="tab" class="wrapper">
+                            <tr id="row" class="abcd">
+                            <tr>
+                                <td>
+                                    <label for=add_type>Phone Type</label>
+                                    <select id="add_type" name="phone_type[]">
+                                        <option value="Home">Home</option>
+                                        <option value="Work">Work</option>
+                                    </select>
+                                </td>
+                                <td> 
+                                    <input type = "hidden" name = "phoneId[]" value = "<?php echo $phoneId[$i]?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name='areacode[]' value='<?php echo $areacode[$i]?>' class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name='number[]' value='<?php echo $number[$i]?>' class="form-control"/>
+                                </td>
+                            </tr>
+                            </tr>
+                        </table>
+                        <button id="del_existing" type ="button" class="btn btn-danger btn-sm" value = "<?php echo $phoneId[$i]?>">DEL</button>
+                    </div>
+                 </fieldset>
+            <?php } ?>
+            
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Phone New</legend>
+            <div id="phoneclone"></div>
+            </fieldset>
 
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Address Type</label>
-                        <select id="add_type" name="add_type[]">
-                            <option value="Home">Home</option>
-                            <option value="Work">Work</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="address[]" placeholder='Enter Address' />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='city[]' placeholder='Enter City' class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='state[]' placeholder='Enter State' class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='zip[]' placeholder='Enter Zipcode' class="form-control" />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del" type ="button">DEL</button>
-        </div>
-        <br />
-        <button id="addPhone" type="button">ADD Phone Info</button>
-        
-        <?php for($i = 0; $i < count($phonetype); $i++){?>
-            <div id="phone_existing">
+            <div id="phone" style="display: none">
                 <table id="tab" class="wrapper">
-
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
@@ -263,115 +315,91 @@
                                 <option value="Work">Work</option>
                             </select>
                         </td>
-                        <td> 
-                            <input type = "hidden" name = "phoneId[]" value = "<?php echo $phoneId[$i]?>"/>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='areacode[]' placeholder='Enter Area Code' class="form-control"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name='areacode[]' value='<?php echo $areacode[$i]?>' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" name='number[]' value='<?php echo $number[$i]?>' />
+                            <input type="text" name='number[]' placeholder='Enter Number' class="form-control" />
                         </td>
                     </tr>
                     </tr>
                 </table>
-                <button id="del_existing" type ="button" value = "<?php echo $phoneId[$i]?>">DEL</button>
+                <button id="del" type ="button">DEL</button>
             </div>
-        <?php } ?>
-        
-        <div id="phoneclone"></div>
-        <div id="phone" style="display: none">
-            <table id="tab" class="wrapper">
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Phone Type</label>
-                        <select id="add_type" name="phone_type[]">
-                            <option value="Home">Home</option>
-                            <option value="Work">Work</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='areacode[]' placeholder='Enter Area Code' />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name='number[]' placeholder='Enter Number' class="form-control" />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del" type ="button">DEL</button>
-        </div>
-        <br />
-        <button id="addDate" type="button">ADD Date Info</button>
-        
-        <?php for($i = 0; $i < count($datetype); $i++){?>
-            <div id="date_existing">
+            <br />
+            <button id="addDate" type="button" class="btn btn-primary btn-sm">ADD Date Info</button>
+            
+            <?php for($i = 0; $i < count($datetype); $i++){?>
+                <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Date Old</legend>
+                    <div id="date_existing">
+                        <table id="tab" class="wrapper">
+                            <tr id="row" class="abcd">
+                            <tr>
+                                <td>
+                                    <label for=add_type>Date Type</label>
+                                    <select id="add_type" name="date_type[]">
+                                        <option value="BirthDate">Birth</option>
+                                        <option value="AnniverseryDate">Anniversery</option>
+                                    </select>
+                                </td>
+                                <td> 
+                                    <input type = "hidden" name = "dateId[]" value = "<?php echo $dateId[$i]?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" name='day[]' value='<?php echo $date[$i]?>' class="form-control"/>
+                                </td>
+                            </tr>
+                            </tr>
+                        </table>
+                        <button id="del_existing" type ="button" class="btn btn-danger btn-sm" value = "<?php echo $dateId[$i]?>">DEL</button>
+                    </div>
+                </fieldset>
+            <?php } ?>
+            
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Date New</legend>
+            <div id="dateclone"></div>
+            </fieldset>
+
+            <div id="date" style="display: none">
                 <table id="tab" class="wrapper">
                     <tr id="row" class="abcd">
                     <tr>
                         <td>
-                            <label for=add_type>Date Type</label>
+                            <label for=add_type>Phone Type</label>
                             <select id="add_type" name="date_type[]">
                                 <option value="BirthDate">Birth</option>
                                 <option value="AnniverseryDate">Anniversery</option>
                             </select>
                         </td>
-                        <td> 
-                            <input type = "hidden" name = "dateId[]" value = "<?php echo $dateId[$i]?>"/>
-                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="date" name='day[]' value='<?php echo $date[$i]?>' />
+                            <input type="date" name='day[]' class="form-control"/>
                         </td>
                     </tr>
                     </tr>
                 </table>
-                <button id="del_existing" type ="button" value = "<?php echo $dateId[$i]?>">DEL</button>
+                <button id="del" type ="button" class="btn btn-danger btn-sm">DEL</button>
             </div>
-        <?php } ?>
+            <br />
+            <div id="submit">
+                <table id="tab" class="wrapper">
 
-        <div id="dateclone"></div>
-        <div id="date" style="display: none">
-            <table id="tab" class="wrapper">
-                <tr id="row" class="abcd">
-                <tr>
-                    <td>
-                        <label for=add_type>Phone Type</label>
-                        <select id="add_type" name="date_type[]">
-                            <option value="BirthDate">Birth</option>
-                            <option value="AnniverseryDate">Anniversery</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="date" name='day[]' />
-                    </td>
-                </tr>
-                </tr>
-            </table>
-            <button id="del" type ="button">DEL</button>
-        </div>
-        <br />
-        <div id="submit">
-            <table id="tab" class="wrapper">
-
-                <tr id="row" class="abcd">
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" name='newcontact' value="Send" /></td>
-                </tr>
-                </tr>
-            </table>
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" class="btn btn-success btn-lg" name='newcontact' value="Send" /></td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
         </div>
 </body>
 

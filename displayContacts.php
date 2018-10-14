@@ -31,9 +31,7 @@ if($search){
 	}
 
 	$query = substr($query, 0, strlen($query) - 4);
-	// $search_count = "SELECT count(*) as count from (" . $search . ") AS search";
-	// Get a response from the database by sending the connection
-	// and the query
+	
 	$response = mysqli_query($dbc, $query);
 
 	// If the query executed properly proceed

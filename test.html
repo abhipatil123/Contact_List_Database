@@ -47,9 +47,9 @@
 
 <body>
     <div class = "container">
-        <form action="http://localhost/contactlist/Contact_List_Database/addContact.php" method="POST" id="form">
-            <fieldset>
-                <legend>Name</legend>
+        <form action="http://localhost/contactlist/Contact_List_Database/addContact.php" method="POST" id="form" class="form-group" >
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Name</legend>
                 <div id="Name">
                     <table>
                         <tr>
@@ -68,13 +68,14 @@
             </fieldset>
             <br />
 
-            <button id="add" type="button">ADD Address Info</button>
+            <button id="add" type="button" class="btn btn-primary btn-sm">ADD Address Info</button>
 
-            <fieldset>
-                <legend>Address</legend>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Address</legend>
                 <div id="addressclone"></div>
             </fieldset>
 
+            
             <div id="address" style="display: none">
                 <table id="tab" class="wrapper">
 
@@ -110,17 +111,17 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del">DEL</button>
+                <button id="del" class="btn btn-danger btn-sm" >DEL</button>
             </div>
             
             <br />
-            <button id="addPhone" type="button">ADD Phone Info</button>
+            <button id="addPhone" type="button" class="btn btn-primary btn-sm">ADD Phone Info</button>
 
-            <fieldset>
-                <legend>Phone</legend>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Phone</legend>
             <div id="phoneclone"></div>
             </fieldset>
-
+            
             <div id="phone" style="display: none">
                 <table id="tab" class="wrapper">
 
@@ -146,13 +147,13 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del">DEL</button>
+                <button id="del" class="btn btn-danger btn-sm">DEL</button>
             </div>
             <br />
-            <button id="addDate" type="button">ADD Date Info</button>
+            <button id="addDate" type="button" class="btn btn-primary btn-sm">ADD Date Info</button>
 
-            <fieldset>
-                <legend>Phone</legend>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Date</legend>
                 <div id="dateclone"></div>
             </fieldset>
 
@@ -176,7 +177,7 @@
                     </tr>
                     </tr>
                 </table>
-                <button id="del">DEL</button>
+                <button id="del" class="btn btn-danger btn-sm">DEL</button>
             </div>
             <br />
             <div id="submit">
@@ -184,7 +185,7 @@
 
                     <tr id="row" class="abcd">
                     <tr>
-                        <td colspan="2" ><input type="submit" name='newcontact' value="Send" /></td>
+                        <td colspan="2" ><input type="submit" name='newcontact' value="Send" class="btn btn-success btn-lg"/></td>
                     </tr>
                     </tr>
                 </table>

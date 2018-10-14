@@ -353,7 +353,7 @@
             for($i = 0; $i < count($address) - 1; $i++){
                 if($addressId[$i]){
                     $query = "UPDATE  address  SET  Address_type = '$addtype[$i]', Address = '$address[$i]',  City = '$city[$i]', 
-                                                    State = '$state[$i]', Zip = 'zip[$i]' WHERE Address_Id = $addressId[$i]";
+                                                    State = '$state[$i]', Zip = '$zip[$i]' WHERE Address_Id = $addressId[$i]";
                     $result = mysqli_query($dbc, $query);
                     if($result){
                         echo "Contact Address Modified Succesfully";
@@ -385,7 +385,7 @@
                     }
                 }else{
                     $query = "INSERT INTO phone ( Contact_Id, Phone_type, Area_Code, Number) 
-                        VALUES ( '$id', '$phonetype[$i]', '$areacode[$i]', $number[$i])";
+                        VALUES ( '$id', '$phonetype[$i]', '$areacode[$i]', '$number[$i]')";
                     $result = mysqli_query($dbc, $query);
                     if($result){
                         "Contact Phone inserted Succesfully";
