@@ -422,7 +422,11 @@
             echo "<a href = 'addStudent.html'> Home </a>";
             exit;
         }
-        
+            echo '<script language="javascript">';
+            echo 'alert("Contact Successfully added")';
+            echo '</script>';
+            // header("Location: http://localhost/contactlist/Contact_List_Database/test.html"); /* Redirect browser */
+            // exit();
         } //else {    
         
     //     echo 'You need to enter the following data<br />';

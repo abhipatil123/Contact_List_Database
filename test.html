@@ -11,7 +11,6 @@
             $("#form").submit(function (e) {
                 //e.preventDefault();
                 console.log( $( this ).serialize() );
-                
 
             });
 
@@ -54,7 +53,7 @@
                 <div id="Name">
                     <table>
                         <tr>
-                            <td> <input type="text" name="first_name" size="30" class="form-control" placeholder='First Name'  /></td>
+                            <td> <input type="text" name="first_name" size="30" class="form-control" placeholder='First Name'  required/></td>
                         </tr>
 
                         <tr>
@@ -62,7 +61,7 @@
                         </tr>
 
                         <tr>
-                            <td> <input type="text" name="last_name" size="30" class="form-control" placeholder='Last Name'  /></td>
+                            <td> <input type="text" name="last_name" size="30" class="form-control" placeholder='Last Name'  required/></td>
                         </tr>
                     </table>
                 </div>

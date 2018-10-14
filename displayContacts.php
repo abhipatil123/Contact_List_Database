@@ -2,19 +2,42 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" >
 	<link rel="stylesheet" type="text/css" href="displayContact.css"/>
-    <title>Contact Info</title>
+	<title>Contact Info</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+		 $(document).ready(function () {
+           
+            $(document).on("click", "#del", function () {
+				if (!confirm("Do you want to delete?")){
+					return false;
+				}
+                $ad_id=$(this).val();
+                console.log($ad_id);
+                
+                $.ajax({
+                    url: "http://localhost/contactlist/Contact_List_Database/delete.php",
+                    type: "POST",
+                    data: "ad_id="+$ad_id,
+                    success: function (data) {
+                        
+                    },
+                    error: function (data) {
+                        alert("An error occurred while loading XML file.");
+                    },
+				});
+				
+				alert("Contact deleted with Contact Id: " + $ad_id);
+				location.reload();
+			});
+		});
+	</script>
 </head>
 <body>
-	<h2 style="text-align: center"> Welcome to Contact Management System</h2>
-	<!-- <form action = "displayContacts.php" method="GET">
-		<input type = "text" name="search">
-		<input type = "submit" value="Search">
-	</form> -->
-	
+	<h2 style="text-align: center"> Welcome to Contact Management System</h2>	
 	<nav class="navbar navbar-light bg-light justify-content-between">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href= "test.html">Add New Contact</a>
+					<a class="nav-link" href= "test.html"> Add New Contact</a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0" action = "displayContacts.php" method="GET">
@@ -70,7 +93,8 @@ if($searchString){
 			$row['Fname'] . '</td><td align="left">' . 
 			$row['Mname'] . '</td><td align="left">' .
 			$row['Lname'] . '</td><td align="left">'.
-			'<a href="delete.php?id = '.$row['ContactId'].'"> Delete </a></td>'.
+			'<button id="del" type ="button" class="btn btn-danger btn-sm" value = "'.$id.'">DEL</button>'.
+			
 			'</td><td align="left">'. '<a href="modify.php?id = '.$row['ContactId'].'"> Modify </a></td>';
 
 			echo '</tr>';
