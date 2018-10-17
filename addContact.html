@@ -3,46 +3,195 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="addContact.css" />
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#form").submit(function (e) {
+                //e.preventDefault();
+                console.log( $( this ).serialize() );
+
+            });
+
+            $("#add").click(function () {
+                $("#address").clone().appendTo("#addressclone").show();
+
+                $(document).on("click", "#del", function () {
+                    $(this).parent("#address").remove();
+                });
+
+            });
+
+            $("#addPhone").click(function () {
+                $("#phone").clone().appendTo("#phoneclone").show();
+
+                $(document).on("click", "#del", function () {
+                    $(this).parent("#phone").remove();
+                });
+
+            });
+
+            $("#addDate").click(function () {
+                $("#date").clone().appendTo("#dateclone").show();
+
+                $(document).on("click", "#del", function () {
+                    $(this).parent("#date").remove();
+                });
+
+            });
+        });
+    </script>   
 </head>
 
 <body>
-    <h1 class=mainheading>Welcome to Contact-base Management System</h1>
+    <h2 style="text-align: center"> Add Contact </h2>
+    <div class = "container">
+        <form action="http://localhost/contactlist/Contact_List_Database/addContact.php" method="POST" id="form" class="form-group" >
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Name</legend>
+                <div id="Name">
+                    <table>
+                        <tr>
+                            <td> <input type="text" name="first_name" size="30" class="form-control" placeholder='First Name'  required/></td>
+                        </tr>
 
-    <!-- <div class=container>
-        <form action = "http://localhost/contactlist/Contact_List_Database/displayContacts.php" method="GET">
-            <table>
-                <tr>
-                    <td><input type = "text" name="search" class="form-control" placeholder="Search Contact"></td>
-                    <td><input type = "submit" value="Search" class="btn btn-primary"/></td>
-                </tr>
-            </table>
+                        <tr>
+                            <td > <input type="text" name="middle_name" size="30" class="form-control" placeholder='Middle Name' required /></td>
+                        </tr>
+
+                        <tr>
+                            <td> <input type="text" name="last_name" size="30" class="form-control" placeholder='Last Name'  required/></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <br />
+
+            <button id="add" type="button" class="btn btn-primary btn-sm">ADD Address Info</button>
+
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Address</legend>
+                <div id="addressclone"></div>
+            </fieldset>
+
+            
+            <div id="address" style="display: none">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <input list="add_type" placeholder="Address Type" name="add_type[]">
+                            <datalist id="add_type">
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="address[]" class="form-control" placeholder='Enter Address' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='city[]' placeholder='Enter City' class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='state[]' placeholder='Enter State' class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='zip[]' placeholder='Enter Zipcode' class="form-control"/>
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del" class="btn btn-danger btn-sm" >DEL</button>
+            </div>
+            
+            <br />
+            <button id="addPhone" type="button" class="btn btn-primary btn-sm">ADD Phone Info</button>
+
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Phone</legend>
+            <div id="phoneclone"></div>
+            </fieldset>
+            
+            <div id="phone" style="display: none">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <input list="phone_type" placeholder="Phone Type" name="phone_type[]">
+                            <datalist id="phone_type">
+                                <option value="Home">Home</option>
+                                <option value="Work">Work</option>
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='areacode[]' placeholder='Enter Area Code'  class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name='number[]' placeholder='Enter Number' class="form-control" />
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del" class="btn btn-danger btn-sm">DEL</button>
+            </div>
+            <br />
+            <button id="addDate" type="button" class="btn btn-primary btn-sm">ADD Date Info</button>
+
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Date</legend>
+                <div id="dateclone"></div>
+            </fieldset>
+
+            <div id="date" style="display: none">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td>
+                            <input list="date_type" placeholder="Date Type" name="date_type[]">
+                            <datalist id="date_type">
+                                <option value="Birth">Birth</option>
+                                <option value="Anniversery">Anniversery</option>
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" name='day[]' class="form-control"/>
+                        </td>
+                    </tr>
+                    </tr>
+                </table>
+                <button id="del" class="btn btn-danger btn-sm">DEL</button>
+            </div>
+            <br />
+            <div id="submit">
+                <table id="tab" class="wrapper">
+
+                    <tr id="row" class="abcd">
+                    <tr>
+                        <td colspan="2" ><input type="submit" name='newcontact' value="Send" class="btn btn-success btn-lg"/></td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
         </form>
-    </div>   -->
-    <nav class="navbar navbar-expand-lg navbar-bisque bg-bisque">
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Add</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Modify</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-
-
-
+    </div>
 </body>
+
+</html>
